@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<!--Установка кодировки UTF-8-->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--Заголовок страницы-->
+		<title>Интерфейс управления</title>
+
+	<!--CSS code-->
+		<style type="text/css">
+			.main { 
+    			width: 1024px;
+    			height: 720px; 
+    			border: solid 1px black; 
+   			}
+   			#headtxt {
+   				height: 80px;
+   				background: #AFA1AF; border-bottom: 2px solid #7B5427;
+   			}
+   			#headtxt h2 {
+   				padding: 20px; margin: 0; /* Отступы */
+   			}
+   		/* Оформление пульта */
+   			#pult {
+   				width: 600px;
+   				height: 400px;
+				border: 2px solid black;
+				border-radius: 10%;
+				background: gray;
+			}
+			#pult_main {
+				top: 200px;
+				left: 212px;
+				position: absolute;
+			}
+		/* Оформление переключателя режима */
+			.switch-btn {
+				display: inline-block;/* Отоброжение в линию */
+				width: 62px; 
+				height: 24px; 
+				border-radius: 12px;
+				background: #bfbfbf; 
+				z-index: 0;
+				margin: 0;
+				padding: 0;
+				border: none;
+				cursor: pointer;
+				position: absolute;
+				transition-duration: 300ms; 
+				left: 520px;
+				top: 20px;
+			}
+			.switch-btn::after {
+				content: "";
+				height: 36px;
+				width: 36px; 
+				border-radius: 18px; 
+				background: #fff; 
+				top: -6px; 
+				left: -6px; 
+				transition-duration: 300ms; 
+				box-shadow: 0 0 10px 0 #999999; 
+				position: absolute;
+				z-index: 1;
+			}
+			.switch-on {
+				background: #fff;
+				box-shadow: inset 0 0 10px 0 #999999; /* тень */
+			}
+			.switch-on::after {
+				left: 30px;
+				background: #118c4e;
+			}
+			#power_pult{
+				position: absolute;
+				width: 110px;
+				height: 90px;
+				left: 494px;
+				top: 8px;
+				border-radius: 30%;
+				background: #A60000;
+			}
+			#power_pult h5 {
+				color: black;
+				position: absolute;
+				top: 24px;
+			}
+		/* Оформление экрана с координатами */
+			#monitor {
+				position: absolute; /* Тип позиционирования элемента на сайте */
+				background: black;/* Заливка чёрным цветом */
+				width: 240px;/* Ширина */
+				height: 140px;/* Высота */
+				border: 2px solid black;/* Граница */
+				border-radius: 10%;/* Скругление */
+				left: 180px;/* Отступ от левого края */
+				top: 40px;/* Отступ от верхего края */
+				color: white;/* Цвет текста */
+			}
+			.info {
+				position: absolute;
+				left: 10px;
+				line-height: 0.4;/* Межстрочный интервал */
+			}
+		/* Оформление кнопок */
+			#frwrd {
+				top: 200px;
+				left: 265px;
+				position: absolute;
+				border-radius: 30%;
+			}
+			#bck {
+				top: 290px;
+				left: 271px;
+				position: absolute;
+				border-radius: 30%;
+			}
+			#lft {
+				top: 240px;
+				left: 180px;
+				position: absolute;
+				border-radius: 30%;
+			}
+			#rght {
+				top: 240px;
+				left: 340px;
+				position: absolute;
+				border-radius: 30%;
+			}
+			#spd_d {
+				top: 320px;
+				left: 20px;
+				position: absolute;
+				border-radius: 30%;
+			}
+			#spd_u {
+				top: 320px;
+				left: 480px;
+				position: absolute;
+				border-radius: 30%;
+			}
+			#reset_val {
+				top: 16px;
+				left: 20px;
+				position: absolute;
+				border-radius: 20%;
+			}
+			#left_lamp_bt{
+				position: absolute;
+				top: 660px;
+				left: 20px;
+			}
+			#right_lamp_bt{
+				position: absolute;
+				top: 660px;
+				left: 870px;
+			}
+			#left_lamp{
+				position: absolute;
+				top: 150px;
+				left: 140px;
+				width: 30px;
+				height: 30px;
+				border: 2px solid black;
+				border-radius: 50%;
+				background: black;
+			}
+			#right_lamp{
+				position: absolute;
+				top: 150px;
+				left: 430px;
+				width: 30px;
+				height: 30px;
+				border: 2px solid black;
+				border-radius: 50%;
+				background: black;
+			}
+   		</style>
+	</head>
+
+	<body>
+	<!--Тело сайта-->
+		<div class="main">
+		<!--Текущий режим-->
+			<div id="headtxt"><h2 id="textmode" align="center">Режим: АВТОМАТ</h2></div><!--id - индетификатор для обращения к элементу, его оформления-->
+		<!--Пульт управленя-->
+			<div id="pult_main" align="center"><!--align - позиционирование на странице-->
+				<div id="pult">
+				<!--Монитор-->
+					<div id="monitor">
+						<div class="info"><!--class - индетификатор класса, для обращения и изменения всех объектов с данным классом-->
+						<!--Данные на мониторе-->
+							<h5 align="left" id="x_pos">x pos: 0</h5>
+							<h5 align="left" id="y_pos">y pos: 0</h5>
+							<h5 align="left" id="angle">angle: 0</h5>
+							<h5 align="left" id="speed">speed: 20</h5>
+						</div>
+					</div>
+				<!--Переключатель автомат\ручной-->
+					<div id="power_pult"><h5>Включение пульта</h5></div>
+					<div class="switch-btn switch-on"></div>
+				<!--Сигналы о преграде-->
+					<div id="left_lamp"></div>
+					<div id="right_lamp"></div>
+				<!--Кнопки пульта-->
+					<div id="keys">
+						<button id="frwrd" onmousedown="set_but(event)" onmouseup="reset_but(event)"><h3>Вперёд</h3></button><!--onmousedown - вызов функции js по нажатию-->
+						<button id="bck" onmousedown="set_but(event)" onmouseup="reset_but(event)"><h3>Назад</h3></button><!--onmouseup - вызов функции js при отжатии-->
+						<button id="lft" onmousedown="set_but(event)" onmouseup="reset_but(event)"><h3>Поворот <br>налево</h3></button>
+						<button id="rght" onmousedown="set_but(event)" onmouseup="reset_but(event)"><h3>Поворот <br>направо</h3></button>
+						<button id="spd_d" onmousedown="set_but(event)" onmouseup="reset_but(event)"><h3>Скорость -</h3></button>
+						<button id="spd_u" onmousedown="set_but(event)" onmouseup="reset_but(event)"><h3>Скорость +</h3></button>
+						<button id="reset_val" onmouseup="go_home()"><h3>Домой</h3></button>
+					</div>
+				</div>
+			</div>
+		<!--Кнопки для имитации преграды-->
+			<button id="left_lamp_bt" onmouseup="left_lamp()" onmousedown="left_lamp()"><h3>Имитация слева</h3></button>
+			<button id="right_lamp_bt" onmouseup="right_lamp()" onmousedown="right_lamp()"><h3>Имитация справа</h3></button>
+		</div>
+   	<!--JS code-->
+   	<script type="text/javascript" src="scrypt.js"></script><!--type - указание типа подключаемого скрипта--><!--scr - расположение скрипта-->
+	</body>
+</html>
